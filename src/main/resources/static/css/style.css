@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+* {
+    padding: 10px;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+h2 {
+    text-align: center;
+    color: #f06e65;
+}
+
+#employee-list-container {
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid grey;
+    border-radius: 10px;
+    box-shadow: 5px 10px #b5b5b5;
+}
