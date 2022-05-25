@@ -10,7 +10,7 @@
     <title>Employee Record</title>
 </head>
 <body>
-    <h2>List of Employees</h2>
+    <h2 id="page-title" style="text-align: center; color: #f06e65;"><b>List of Employees</b></h2>
 
     <!-- Add Employee Button -->
     <div style="display: flex; justify-content: flex-end;" data-bs-toggle="tooltip" title="Add Employee">
@@ -25,42 +25,46 @@
 
           <!-- Modal Header -->
           <div style="display: flex; justify-content: flex-end;">
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            <button type="button" class="btn-close" onclick="resetForm()" data-bs-dismiss="modal"></button>
           </div>
           <div class="modal-header">
-            <h4 class="modal-title">Add Employee</h4>
+            <h4 class="modal-title" style="color: #f06e65;"><b>Add Employee</b></h4>
           </div>
 
           <!-- Modal body -->
           <div class="modal-body">
-            <form action="">
+            <form id="add-employee-form" action="/employees/add" method="POST">
               <div class="row">
                 <div class="col">
-                    <label for="first-name" class="form-label">First Name<span style="color: red;">*</span></label>
-                    <input type="text" class="form-control" id="first-name" placeholder="e.g. John" name="first-name" required>
+                    <label for="first-name" class="form-label"><b>First Name<span style="color: red;">*</span></b></label>
+                    <input type="text" class="form-control" id="first-name" size="50" placeholder="e.g. John"
+                    name="firstName" autofocus required>
                 </div>
                 <div class="col">
-                    <label for="last-name" class="form-label">Last Name<span style="color: red;">*</span></label>
-                    <input type="text" class="form-control" id="last-name" placeholder="e.g. Smith" name="last-name" required>
+                    <label for="last-name" class="form-label"><b>Last Name<span style="color: red;">*</span></b></label>
+                    <input type="text" class="form-control" id="last-name" size="50" placeholder="e.g. Smith"
+                    name="lastName"
+                    required>
                 </div>
               </div>
               <div class="mb-3">
-                 <label for="email" class="form-label">Email<span style="color: red;">*</span></label>
-                 <input type="email" class="form-control" id="email" placeholder="abc@xyz.com" name="email" required>
+                 <label for="email" class="form-label"><b>Email<span style="color: red;">*</span></b></label>
+                 <input type="email" class="form-control" id="email" size="50" pattern="[a-zA-Z0-9._-]+@[a-z0-9.-]+\.[a-zA-Z]+" placeholder="abc@xyz.com" name="email" required>
               </div>
               <div class="row">
                   <div class="col">
-                     <label for="dob" class="form-label">Date of Birth<span style="color: red;">*</span></label>
-                     <input type="date" class="form-control" id="dob" placeholder="dd-mm-yyyy" name="dob" required>
+                     <label for="dob" class="form-label"><b>Date of Birth<span style="color: red;">*</span></b></label>
+                     <input type="date" step="1" max="2004-12-31" class="form-control" id="dob" name="dob" required>
                   </div>
                   <div class="col">
-                     <label for="salary" class="form-label">Salary (INR)<span style="color: red;">*</span></label>
-                     <input type="number" step="0.01" min="0" max="100000000" class="form-control" id="salary" placeholder="e.g. 25000.00" name="salary" required>
+                     <label for="salary" class="form-label"><b>Salary (INR)<span style="color: red;">*</span></b></label>
+                     <input type="number" step="0.01" min="0" max="10000000" class="form-control" id="salary"
+                     placeholder="e.g. 25000.00" name="salary" required>
                   </div>
               </div>
               <div class="row">
                 <div class="col">
-                    <label for="gender" class="form-label">Gender<span style="color: red;">*</span></label>
+                    <label for="gender" class="form-label"><b>Gender<span style="color: red;">*</span></b></label>
                     <select id="gender" class="form-select" name="gender" required>
                         <option>Male</option>
                         <option>Female</option>
@@ -68,7 +72,7 @@
                     </select>
                 </div>
                 <div class="col">
-                    <label for="status" class="form-label">Status<span style="color: red;">*</span></label>
+                    <label for="status" class="form-label"><b>Status<span style="color: red;">*</span></b></label>
                     <select id="status" class="form-select" name="status" required>
                         <option>Active</option>
                         <option>Inactive</option>
@@ -79,8 +83,9 @@
 
               <!-- Modal Footer -->
               <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" style="margin-right: 10px;">Cancel</button>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="button" id="cancel-btn" class="btn btn-outline-danger" onclick="resetForm()"
+                data-bs-dismiss="modal" style="margin-right:10px;">Cancel</button>
+                <button type="submit" id="submit-btn" class="btn btn-outline-primary">Submit</button>
               </div>
             </form>
           </div>
@@ -92,5 +97,10 @@
     <div id="employee-list-container">
         <p>Inside the container...</p>
     </div>
+    <script>
+        function resetForm(){
+            document.getElementById("add-employee-form").reset();
+        }
+    </script>
 </body>
 </html>
