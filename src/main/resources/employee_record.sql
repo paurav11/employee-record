@@ -1,3 +1,5 @@
+CREATE DATABASE employee_record;
+USE employee_record;
 CREATE TABLE employee (
     emp_id INT(3) NOT NULL,
     first_name VARCHAR(255) NOT NULL,

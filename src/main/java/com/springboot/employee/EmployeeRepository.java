@@ -1,6 +1,17 @@
 package com.springboot.employee;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+@Repository
 public interface EmployeeRepository extends JpaRepository<Employee,Integer> {
+
+    // Custom query to find employees by their email
+    @Query(value = "SELECT * FROM employee WHERE email = ?1", nativeQuery = true)
+    List<Employee> findByEmailAddress(String email);
+
+    @Query(value = "SELECT * FROM employee", nativeQuery = true)
+    List<Employee> findAllEmployees();
 }
