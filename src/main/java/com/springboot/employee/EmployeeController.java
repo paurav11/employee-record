@@ -109,7 +109,7 @@ public class EmployeeController {
 //    }
 
     // Find employees by their email
-    private boolean isEmployee(@PathVariable String email){
+    private boolean isEmployee(String email){
         List<Employee> empList = employeeRepository.findByEmailAddress(email);
         if (empList.size() != 0) {
             return true;
@@ -122,5 +122,26 @@ public class EmployeeController {
     @RequestMapping(value = "/employees/all", method = RequestMethod.GET)
     public @ResponseBody List<Employee> getAllEmployees() {
         return employeeRepository.findAllEmployees();
+    }
+
+    private boolean isEmployeeId(int id){
+        List<Employee> empList = employeeRepository.findByEmployeeId(id);
+        if (empList.size() != 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Delete an employee
+    @RequestMapping(value = "/employees/delete/{id}", method = RequestMethod.DELETE)
+    public @ResponseBody ResponseEntity deleteAnEmployee(@PathVariable String id){
+        int empId = Integer.parseInt(id);
+        if (isEmployeeId(empId)) {
+            employeeRepository.deleteById(empId);
+            return new ResponseEntity(HttpStatus.OK);
+        } else {
+            return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
+        }
     }
 }

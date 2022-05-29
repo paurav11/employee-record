@@ -11,39 +11,42 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
     <title>Employee Record</title>
     <script type="text/javascript">
+        getEmployees();
 
-        // Fetch all employee records
-        $(document).ready(function(){
+        function getEmployees(){
             $.ajax({
                 type: "GET",
                 url: "http://localhost:8080/employees/all",
                 context: document.body,
                 success: function(result){
                     console.log(result);
-                    var empList = JSON.parse(JSON.stringify(result));
-                    if (Object.keys(empList).length === 0){
-                         let empData = "<p align='center'>Currently, no records are available. Click the <i class='fa-solid fa-plus' style='font-size: 1em;'></i> button to add an employee.</p>"
-                         document.getElementById("employee-list-container").innerHTML = empData;
-                    } else {
-                        let empData = "<table class='table table-hover table-borderless' id='emp-table' width='100%' style='text-align:center;'>";
-                        empData += "<thead class='thead-light'><tr><th>#</th><th>First Name</th><th>Last Name</th><th>Email</th><th>Gender</th><th>DOB</th><th>Age</th><th>Salary</th><th>Status</th><th>Edit</th><th>Delete</th></tr></thead>";
-                        for (let x in empList) {
-                            empData += "<tbody><tr style='vertical-align: middle;'><td>" + empList[x].employeeId + "</td><td>" + empList[x].firstName  +
-                            "</td><td>"+ empList[x].lastName + "</td><td>" + empList[x].email + "</td><td>" + empList[x].gender + "</td><td>" +
-                            empList[x].dob + "</td><td>" + empList[x].age + "</td><td>&#x20B9; " + empList[x].salary + "</td><td>" + empList[x].status +
-                            "</td><td><a href='http://localhost:8080/employees/edit/" + empList[x].employeeId +
-                            "'><button type='button' class='btn btn-sm'><i class='fa-solid fa-pen-to-square'></i></button></a></td><td><a href='http://localhost:8080/employees/delete/" + empList[x].employeeId +
-                            "'><button type='button' class='btn btn-sm'><i class='fa-solid fa-trash'></i></button></a></td></tr></tbody>";
-                        }
-                        empData += "</table>";
-                        document.getElementById("employee-list-container").innerHTML = empData;
-                    }
+                    createEmployeeTable(result);
                 },
                 error: function(error){
                     alert(error);
                 }
             });
-        });
+        }
+
+        function createEmployeeTable(result){
+            var empList = JSON.parse(JSON.stringify(result));
+            if (Object.keys(empList).length === 0){
+                 let empData = "<p align='center'>Currently, no records are available. Click the <i class='fa-solid fa-plus' style='font-size: 1em;'></i> button to add an employee.</p>"
+                 document.getElementById("employee-list-container").innerHTML = empData;
+            } else {
+                let empData = "<table class='table table-hover table-borderless' id='emp-table' width='100%' style='text-align:center;'>";
+                empData += "<thead class='thead-light'><tr><th>#</th><th>First Name</th><th>Last Name</th><th>Email</th><th>Gender</th><th>DOB</th><th>Age</th><th>Salary</th><th>Status</th><th>Edit</th><th>Delete</th></tr></thead>";
+                for (let x in empList) {
+                    empData += "<tbody><tr style='vertical-align: middle;'><td>" + empList[x].employeeId + "</td><td>" + empList[x].firstName  +
+                    "</td><td>"+ empList[x].lastName + "</td><td>" + empList[x].email + "</td><td>" + empList[x].gender + "</td><td>" +
+                    empList[x].dob + "</td><td>" + empList[x].age + "</td><td>&#x20B9; " + empList[x].salary + "</td><td>" + empList[x].status +
+                    "</td><td><a href='http://localhost:8080/employees/edit/" + empList[x].employeeId + "'><button type='button' class='btn btn-sm edit'><i class='fa-solid fa-pen-to-square'></i></button></a></td>" +
+                    "<td><button type='button' id='" + empList[x].employeeId + "' class='btn btn-sm delete'  onclick='deleteEmployee(this.id)'><i class='fa-solid fa-trash'></i></button></td></tr></tbody>";
+                }
+                empData += "</table>";
+                document.getElementById("employee-list-container").innerHTML = empData;
+            }
+        }
 
         $(document).ready(function(){
             $('#submit-btn').click(function() {
@@ -64,8 +67,11 @@
                     data: JSON.stringify(empData),
                     context: document.body,
                     success: function(result){
+                        getEmployees();
+                        resetForm();
                         alert('Employee added successfully.');
-                        location.reload(true);
+                        $("#add-employee-modal").modal('hide');
+                        window.scrollTo(0, document.body.scrollHeight);
                     },
                     error: function(error){
                         alert('Employee already exists! Try entering again with different details.');
@@ -74,6 +80,21 @@
                 });
             });
         });
+
+        function deleteEmployee(empId){
+            $.ajax({
+                type: "DELETE",
+                url: "http://localhost:8080/employees/delete/" + empId,
+                context: document.body,
+                success: function(result){
+                    getEmployees();
+                    alert('Employee deleted successfully.');
+                },
+                error: function(error){
+                    alert('Error occurred!');
+                }
+            });
+        }
 
         function resetForm(){
             document.getElementById("add-employee-form").reset();

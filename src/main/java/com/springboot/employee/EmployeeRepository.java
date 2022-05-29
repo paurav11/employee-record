@@ -8,10 +8,15 @@ import java.util.List;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee,Integer> {
 
-    // Custom query to find employees by their email
+    // Custom query to find an employee by email
     @Query(value = "SELECT * FROM employee WHERE email = ?1", nativeQuery = true)
     List<Employee> findByEmailAddress(String email);
 
+    // Fetch list of all the employees
     @Query(value = "SELECT * FROM employee", nativeQuery = true)
     List<Employee> findAllEmployees();
+
+    // Custom query to find an employee by id
+    @Query(value = "SELECT * FROM employee WHERE emp_id = ?1", nativeQuery = true)
+    List<Employee> findByEmployeeId(int empId);
 }
