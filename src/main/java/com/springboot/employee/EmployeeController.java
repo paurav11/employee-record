@@ -30,7 +30,7 @@ public class EmployeeController {
         return "index";
     }
 
-//    // Add new employee request
+//    // Add a new employee
 //    @RequestMapping(value = "/employees/add", method = RequestMethod.POST)
 //    public @ResponseBody String addNewEmployee(@RequestParam("firstName") String firstName,
 //                                               @RequestParam("lastName") String lastName,
@@ -51,7 +51,7 @@ public class EmployeeController {
 //        return "Employee added successfully.";
 //    }
 
-//    // Add new employee request
+//    // Add a new employee
 //    @RequestMapping(value = "/employees/add", method = RequestMethod.POST)
 //    public @ResponseBody RedirectView addNewEmployee(@RequestParam Map<String,String> body) {
 //
@@ -74,7 +74,7 @@ public class EmployeeController {
 //        return new RedirectView("http://localhost:8080/employees");
 //    }
 
-    // Add new employee request
+    // Add a new employee
     @RequestMapping(value = "/employees/add", method = RequestMethod.POST)
     public @ResponseBody ResponseEntity addNewEmployee(@RequestBody Map<String,String> map) {
 
@@ -108,7 +108,7 @@ public class EmployeeController {
 //        }
 //    }
 
-    // Find employees by their email
+    // Find an employee by email
     private boolean isEmployee(String email){
         List<Employee> empList = employeeRepository.findByEmailAddress(email);
         if (empList.size() != 0) {
@@ -124,6 +124,7 @@ public class EmployeeController {
         return employeeRepository.findAllEmployees();
     }
 
+    // Find an employee by id
     private boolean isEmployeeId(int id){
         List<Employee> empList = employeeRepository.findByEmployeeId(id);
         if (empList.size() != 0) {
@@ -143,5 +144,11 @@ public class EmployeeController {
         } else {
             return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
         }
+    }
+
+    // Count total number of employee records
+    @RequestMapping(value = "/employees/count", method = RequestMethod.GET)
+    public @ResponseBody int getCountOfAllEmployees(){
+        return employeeRepository.countAllEmployees();
     }
 }

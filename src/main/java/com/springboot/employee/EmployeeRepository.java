@@ -19,4 +19,8 @@ public interface EmployeeRepository extends JpaRepository<Employee,Integer> {
     // Custom query to find an employee by id
     @Query(value = "SELECT * FROM employee WHERE emp_id = ?1", nativeQuery = true)
     List<Employee> findByEmployeeId(int empId);
+
+    // Get count of employees in the employee table
+    @Query(value = "SELECT COUNT(emp_id) FROM employee", nativeQuery = true)
+    int countAllEmployees();
 }
