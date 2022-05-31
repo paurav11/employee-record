@@ -107,7 +107,9 @@ public class Employee {
     }
 
     public void setDob(String dob) {
-        this.dob = dob;
+        LocalDate tempDate = LocalDate.parse(dob);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        this.dob = dateTimeFormatter.format(tempDate);
     }
 
     public void setAge(String dob) {

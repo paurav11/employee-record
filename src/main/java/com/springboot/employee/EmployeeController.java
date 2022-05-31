@@ -76,22 +76,26 @@ public class EmployeeController {
 
     // Add a new employee
     @RequestMapping(value = "/employees/add", method = RequestMethod.POST)
-    public @ResponseBody ResponseEntity addNewEmployee(@RequestBody Map<String,String> map) {
+    public @ResponseBody ResponseEntity addNewEmployee(@RequestBody Map<String,String> body) {
 
-        if (isEmployee(map.get("email"))) {
+        if (isEmployee(body.get("email"))) {
             return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
         } else {
-            String firstName = StringUtils.capitalize(map.get("firstName").trim());
-            String lastName = StringUtils.capitalize(map.get("lastName").trim());
-            String email = map.get("email").trim();
-            String gender = map.get("gender").trim();
-            String dob = map.get("dob").trim();
-            double salary = Double.parseDouble(map.get("salary").trim());
-            String status = map.get("status").trim();
+            String firstName = StringUtils.capitalize(body.get("firstName").trim());
+            String lastName = StringUtils.capitalize(body.get("lastName").trim());
+            String email = body.get("email").trim();
+            String gender = body.get("gender").trim();
+            String dob = body.get("dob").trim();
+            double salary = Double.parseDouble(body.get("salary").trim());
+            String status = body.get("status").trim();
 
             // Save form data to the database
-            Employee emp = new Employee(firstName,lastName,email,gender,dob,salary,status);
-            employeeRepository.save(emp);
+            try {
+                Employee emp = new Employee(firstName,lastName,email,gender,dob,salary,status);
+                employeeRepository.save(emp);
+            } catch (Exception e) {
+                return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
+            }
 
             return new ResponseEntity(HttpStatus.CREATED);
         }
@@ -150,5 +154,42 @@ public class EmployeeController {
     @RequestMapping(value = "/employees/count", method = RequestMethod.GET)
     public @ResponseBody int getCountOfAllEmployees(){
         return employeeRepository.countAllEmployees();
+    }
+
+    // Fetch employee details by id
+    @RequestMapping(value = "/employees/{id}", method = RequestMethod.GET)
+    public @ResponseBody List<Employee> getEmployee(@PathVariable int id){
+        return employeeRepository.findByEmployeeId(id);
+    }
+
+    // Update an employee details
+    @RequestMapping(value = "/employees/edit/{id}", method = RequestMethod.PUT)
+    public @ResponseBody ResponseEntity updateEmployee(@RequestBody Map<String,String> body, @PathVariable int id) {
+
+        String firstName = StringUtils.capitalize(body.get("firstName").trim());
+        String lastName = StringUtils.capitalize(body.get("lastName").trim());
+        String email = body.get("email").trim();
+        String gender = body.get("gender").trim();
+        String dob = body.get("dob").trim();
+        double salary = Double.parseDouble(body.get("salary").trim());
+        String status = body.get("status").trim();
+
+        // Update form data in the database
+        try {
+            Employee emp = new Employee();
+            emp.setEmployeeId(id);
+            emp.setFirstName(firstName);
+            emp.setLastName(lastName);
+            emp.setEmail(email);
+            emp.setGender(gender);
+            emp.setDob(dob);
+            emp.setAge(dob);
+            emp.setSalary(salary);
+            emp.setStatus(status);
+            employeeRepository.save(emp);
+        } catch (Exception e){
+            return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
+        }
+        return new ResponseEntity(HttpStatus.CREATED);
     }
 }
