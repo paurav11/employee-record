@@ -2,7 +2,7 @@
 <p align="center">Employee Record is a Spring Boot Web Application that allows you to add, update, delete & view employees.</p>
 <br>
 
-<video src="https://user-images.githubusercontent.com/44253834/171632154-7867a16b-617f-4f1e-a5be-40be7e81d145.mp4" type="video/mp4" controls></video>
+<video height=500 width=600 src="https://user-images.githubusercontent.com/44253834/171632154-7867a16b-617f-4f1e-a5be-40be7e81d145.mp4" type="video/mp4" controls></video>
 
 
 ## Initialize Spring Boot Project
@@ -161,7 +161,7 @@ public class EmployeeController {
 <h1 align="center">Demo</h1>
 
 ## Open Application
-<video src="https://user-images.githubusercontent.com/44253834/171631754-5cdaea10-5cf6-4c2d-bcce-61496762352d.mp4" type="video/mp4" controls></video>
+<video height=500 width=600 src="https://user-images.githubusercontent.com/44253834/171631754-5cdaea10-5cf6-4c2d-bcce-61496762352d.mp4" type="video/mp4" controls></video>
 
 ```java
 @RequestMapping(value ="/employees", method = RequestMethod.GET)
@@ -171,7 +171,7 @@ public String index() {
 ```
 
 ## Add an Employee
-<video src="https://user-images.githubusercontent.com/44253834/171631107-1788981d-a67a-487c-8dbd-c8149161e327.mp4" type="video/mp4" controls></video>
+<video height=500 width=600 src="https://user-images.githubusercontent.com/44253834/171631107-1788981d-a67a-487c-8dbd-c8149161e327.mp4" type="video/mp4" controls></video>
 
 ```java
 @RequestMapping(value = "/employees/add", method = RequestMethod.POST)
@@ -201,7 +201,7 @@ public @ResponseBody ResponseEntity addNewEmployee(@RequestBody Map<String,Strin
 ```
 
 ## Edit an Employee
-<video src="https://user-images.githubusercontent.com/44253834/171633006-d2c8fefe-d900-4817-8d78-a019cf8832ec.mp4" type="video/mp4" controls></video>
+<video height=500 width=600 src="https://user-images.githubusercontent.com/44253834/171633006-d2c8fefe-d900-4817-8d78-a019cf8832ec.mp4" type="video/mp4" controls></video>
 
 ```java
 @RequestMapping(value = "/employees/edit/{id}", method = RequestMethod.PUT)
@@ -236,7 +236,7 @@ public @ResponseBody ResponseEntity updateEmployee(@RequestBody Map<String,Strin
 ```
 
 ## Delete an Employee
-<video src="https://user-images.githubusercontent.com/44253834/171633118-fb28b0da-04e3-4a7b-9c0b-14b3a89995f3.mp4" type="video/mp4" controls></video>
+<video height=500 width=600 src="https://user-images.githubusercontent.com/44253834/171633118-fb28b0da-04e3-4a7b-9c0b-14b3a89995f3.mp4" type="video/mp4" controls></video>
 
 ```java
 @RequestMapping(value = "/employees/delete/{id}", method = RequestMethod.DELETE)
