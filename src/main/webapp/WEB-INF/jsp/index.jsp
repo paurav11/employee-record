@@ -75,7 +75,8 @@
             var salary = $('#salary').val();
 
             if (firstName != "" && lastName != "" && email != "" && dob != "" && salary != ""){
-                if (email.match("[a-zA-Z0-9._-]+@[a-z0-9.-]+\.[a-zA-Z]+")){
+                var mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                if (email.match(mailFormat)){
                     if (dob <= '2004-12-31') {
                        if (salary >= 1 && salary <= 10000000) {
                             addEmployee();
@@ -185,7 +186,8 @@
             var salary = $('#edit-salary').val();
 
             if (firstName != "" && lastName != "" && email != "" && dob != "" && salary != ""){
-                if (email.match("[a-zA-Z0-9._-]+@[a-z0-9.-]+\.[a-zA-Z]+")){
+                var mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                if (email.match(mailFormat)){
                     if (dob <= '2004-12-31') {
                        if (salary >= 1 && salary <= 10000000) {
                             updateEmployee();
