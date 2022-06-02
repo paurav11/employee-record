@@ -1,12 +1,10 @@
 <h1 align="center"><img height=25 width=25 src="https://user-images.githubusercontent.com/44253834/171605731-17be58eb-7935-494c-8c3e-67963107abd7.png"/>&nbsp;&nbsp;Employee Record</h1>
 <p align="center">Employee Record is a Spring Boot Web Application that allows you to add, update, delete & view employees.</p>
 <br>
-
-<video height=500 width=600 src="https://user-images.githubusercontent.com/44253834/171632154-7867a16b-617f-4f1e-a5be-40be7e81d145.mp4" type="video/mp4" controls></video>
-
+<video height=400 width=700 src="https://user-images.githubusercontent.com/44253834/171632154-7867a16b-617f-4f1e-a5be-40be7e81d145.mp4" type="video/mp4" controls></video>
+<br>
 
 ## Initialize Spring Boot Project
-
 - To begin with the project, go to [Spring Initializr](https://start.spring.io/).
 - Select Maven/Gradle project -> Select Lanaguage Java/Kotlin/Groovy -> Select Spring Boot Version -> Enter Project Metadata -> Select Packaging -> Select Java Version -> Add Spring Web Dependency 
 - Finally, click on the Generate button to download a Spring Boot project zip on your system.
@@ -41,11 +39,13 @@ public class SpringBootApplication {
 	}
 }
 ```
+<br>
 
-## MySQL Database Setup & Connectivity with the application
+## MySQL database setup & connectivity with the application
 
 - Open MySQL Workbench & select root user with all the privileges.
 - Create a database "employee_record" & a table "employee" with below given schema.
+
 ```sql
 CREATE TABLE employee (
     emp_id INT(3) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -158,10 +158,12 @@ public class EmployeeController {
     }
 }
 ```
+<br>
 <h1 align="center">Demo</h1>
+<br>
 
-## Open Application
-<video height=500 width=600 src="https://user-images.githubusercontent.com/44253834/171631754-5cdaea10-5cf6-4c2d-bcce-61496762352d.mp4" type="video/mp4" controls></video>
+## Open application
+<video height=400 width=700 src="https://user-images.githubusercontent.com/44253834/171631754-5cdaea10-5cf6-4c2d-bcce-61496762352d.mp4" type="video/mp4" controls></video>
 
 ```java
 @RequestMapping(value ="/employees", method = RequestMethod.GET)
@@ -169,9 +171,10 @@ public String index() {
     return "index";
 }
 ```
+<br>
 
-## Add an Employee
-<video height=500 width=600 src="https://user-images.githubusercontent.com/44253834/171631107-1788981d-a67a-487c-8dbd-c8149161e327.mp4" type="video/mp4" controls></video>
+## Add an employee
+<video height=400 width=700 src="https://user-images.githubusercontent.com/44253834/171631107-1788981d-a67a-487c-8dbd-c8149161e327.mp4" type="video/mp4" controls></video>
 
 ```java
 @RequestMapping(value = "/employees/add", method = RequestMethod.POST)
@@ -199,9 +202,10 @@ public @ResponseBody ResponseEntity addNewEmployee(@RequestBody Map<String,Strin
         return new ResponseEntity(HttpStatus.CREATED);
     }
 ```
+<br>
 
-## Edit an Employee
-<video height=500 width=600 src="https://user-images.githubusercontent.com/44253834/171633006-d2c8fefe-d900-4817-8d78-a019cf8832ec.mp4" type="video/mp4" controls></video>
+## Edit an employee
+<video height=400 width=700 src="https://user-images.githubusercontent.com/44253834/171633006-d2c8fefe-d900-4817-8d78-a019cf8832ec.mp4" type="video/mp4" controls></video>
 
 ```java
 @RequestMapping(value = "/employees/edit/{id}", method = RequestMethod.PUT)
@@ -234,9 +238,10 @@ public @ResponseBody ResponseEntity updateEmployee(@RequestBody Map<String,Strin
     return new ResponseEntity(HttpStatus.CREATED);
 }
 ```
+<br>
 
-## Delete an Employee
-<video height=500 width=600 src="https://user-images.githubusercontent.com/44253834/171633118-fb28b0da-04e3-4a7b-9c0b-14b3a89995f3.mp4" type="video/mp4" controls></video>
+## Delete an employee
+<video height=400 width=700 src="https://user-images.githubusercontent.com/44253834/171633118-fb28b0da-04e3-4a7b-9c0b-14b3a89995f3.mp4" type="video/mp4" controls></video>
 
 ```java
 @RequestMapping(value = "/employees/delete/{id}", method = RequestMethod.DELETE)
@@ -250,6 +255,6 @@ public @ResponseBody ResponseEntity deleteAnEmployee(@PathVariable String id){
     }
 }
 ```
-
+<br>
 
 <p align="center">Drop your queries at <a href="mailto:dev.paurav@gmail.com">dev.paurav@gmail.com</a>.</p>
