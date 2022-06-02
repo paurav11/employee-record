@@ -1,5 +1,5 @@
 <h1 align="center"><img height=25 width=25 src="https://user-images.githubusercontent.com/44253834/171605731-17be58eb-7935-494c-8c3e-67963107abd7.png"/>&nbsp;&nbsp;Employee Record</h1>
-<p align="center">Employee Record is a Spring Boot Web Application that allows us to add, update, delete & view employees.</p>
+<p align="center">Employee Record is a Spring Boot Web Application that allows you to add, update, delete & view employees.</p>
 <br>
 
 https://user-images.githubusercontent.com/44253834/171632154-7867a16b-617f-4f1e-a5be-40be7e81d145.mp4
@@ -250,3 +250,6 @@ public @ResponseBody ResponseEntity deleteAnEmployee(@PathVariable String id){
     }
 }
 ```
+
+
+<p align="center">Drop your queries at <a href="mailto:dev.paurav@gmail.com">dev.paurav@gmail.com</a>.</p>
