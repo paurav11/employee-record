@@ -1,5 +1,17 @@
-package com.springboot.employee;
+/**
+ @author: Paurav Shah
+ @date: 31/05/2022
 
+ @Controller annotation indicates that a particular class serves the role of a controller.
+ @Autowired annotation enables you to inject the object dependency implicitly.
+ @RequestMapping annotation maps a specific request path or pattern onto a controller.
+ ResponseEntity represents the whole HTTP response: status code, headers, and body.
+ */
+
+package com.springboot.employee.controller;
+
+import com.springboot.employee.entity.Employee;
+import com.springboot.employee.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,19 +30,19 @@ public class EmployeeController {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    // Redirect to index page
+    // Method to redirect to the index page
     @RequestMapping(value ="/", method = RequestMethod.GET)
     public RedirectView redirectToIndex() {
         return new RedirectView("http://localhost:8080/employees");
     }
 
-    // Load index page with employee list
+    // Method to load index page having an employee list
     @RequestMapping(value ="/employees", method = RequestMethod.GET)
     public String index() {
         return "index";
     }
 
-//    // Add a new employee
+//    // Method to add a new employee
 //    @RequestMapping(value = "/employees/add", method = RequestMethod.POST)
 //    public @ResponseBody String addNewEmployee(@RequestParam("firstName") String firstName,
 //                                               @RequestParam("lastName") String lastName,
@@ -51,7 +63,7 @@ public class EmployeeController {
 //        return "Employee added successfully.";
 //    }
 
-//    // Add a new employee
+//    // Method to add a new employee
 //    @RequestMapping(value = "/employees/add", method = RequestMethod.POST)
 //    public @ResponseBody RedirectView addNewEmployee(@RequestParam Map<String,String> body) {
 //
@@ -74,7 +86,7 @@ public class EmployeeController {
 //        return new RedirectView("http://localhost:8080/employees");
 //    }
 
-    // Add a new employee
+    // Method to add a new employee
     @RequestMapping(value = "/employees/add", method = RequestMethod.POST)
     public @ResponseBody ResponseEntity addNewEmployee(@RequestBody Map<String,String> body) {
 
@@ -101,7 +113,7 @@ public class EmployeeController {
         }
     }
 
-//    // Find employees by their email
+//    // Method to find an employee by email
 //    @RequestMapping(value = "/employees/{email}", method = RequestMethod.GET)
 //    public @ResponseBody boolean isEmployee(@PathVariable String email){
 //        List<Employee> empList = employeeRepository.findByEmailAddress(email);
@@ -112,7 +124,7 @@ public class EmployeeController {
 //        }
 //    }
 
-    // Find an employee by email
+    // Method to find an employee by email
     private boolean isEmployee(String email){
         List<Employee> empList = employeeRepository.findByEmailAddress(email);
         if (empList.size() != 0) {
@@ -122,13 +134,13 @@ public class EmployeeController {
         }
     }
 
-    // Get a list of all the employees
+    // Method to get a list of all the employees
     @RequestMapping(value = "/employees/all", method = RequestMethod.GET)
     public @ResponseBody List<Employee> getAllEmployees() {
         return employeeRepository.findAllEmployees();
     }
 
-    // Find an employee by id
+    // Method to find an employee by id
     private boolean isEmployeeId(int id){
         List<Employee> empList = employeeRepository.findByEmployeeId(id);
         if (empList.size() != 0) {
@@ -138,7 +150,7 @@ public class EmployeeController {
         }
     }
 
-    // Delete an employee
+    // Method to delete an employee
     @RequestMapping(value = "/employees/delete/{id}", method = RequestMethod.DELETE)
     public @ResponseBody ResponseEntity deleteAnEmployee(@PathVariable String id){
         int empId = Integer.parseInt(id);
@@ -150,19 +162,19 @@ public class EmployeeController {
         }
     }
 
-    // Count total number of employee records
+    // Method to count the total number of employees
     @RequestMapping(value = "/employees/count", method = RequestMethod.GET)
     public @ResponseBody int getCountOfAllEmployees(){
         return employeeRepository.countAllEmployees();
     }
 
-    // Fetch employee details by id
+    // Method to fetch an employee by id
     @RequestMapping(value = "/employees/{id}", method = RequestMethod.GET)
     public @ResponseBody List<Employee> getEmployee(@PathVariable int id){
         return employeeRepository.findByEmployeeId(id);
     }
 
-    // Update an employee details
+    // Method to update an employee
     @RequestMapping(value = "/employees/edit/{id}", method = RequestMethod.PUT)
     public @ResponseBody ResponseEntity updateEmployee(@RequestBody Map<String,String> body, @PathVariable int id) {
 

@@ -14,6 +14,7 @@
         getEmployees();
         getEmployeeCount();
 
+        // Function to get all employees
         function getEmployees(){
             $.ajax({
                 type: "GET",
@@ -21,7 +22,7 @@
                 context: document.body,
                 success: function(result){
                     console.log(result);
-                    createEmployeeTable(result);
+                    displayEmployeeTable(result);
                 },
                 error: function(error){
                     alert(error);
@@ -29,6 +30,7 @@
             });
         }
 
+        // Function to get total employee count
         function getEmployeeCount(){
             $.ajax({
                 type: "GET",
@@ -43,7 +45,8 @@
             });
         }
 
-        function createEmployeeTable(result){
+        // Function to display the employee table
+        function displayEmployeeTable(result){
             var empList = JSON.parse(JSON.stringify(result));
             if (Object.keys(empList).length === 0){
                  let empData = "<p align='center'>Currently, no records are available. Click the <i class='fa-solid fa-plus' style='font-size: 1em;'></i> button to add an employee.</p>"
@@ -63,6 +66,7 @@
             }
         }
 
+        // Function to validate employee details of the add employee form
         function validateEmployeeDetails(){
             var firstName = $('#first-name').val();
             var lastName = $('#last-name').val();
@@ -89,6 +93,7 @@
             }
         }
 
+        // Function to add an employee
         function addEmployee(){
             var empData = {
                 firstName: $('#first-name').val(),
@@ -120,10 +125,12 @@
             });
         }
 
+        // Function to clear the form fields and to reset the form
         function resetForm(){
             document.getElementById("add-employee-form").reset();
         }
 
+        // Function to delete an employee by id
         function deleteEmployee(empId){
            if (confirm("Are you sure you want to delete this employee?")) {
                 $.ajax({
@@ -144,6 +151,7 @@
            }
         }
 
+        // Function to get an employee by id
         function getEmployee(empId){
             $.ajax({
                 type: "GET",
@@ -168,6 +176,7 @@
             });
         }
 
+        // Function to validate employee details of the edit employee form
         function validateEditEmployeeDetails(){
             var firstName = $('#edit-first-name').val();
             var lastName = $('#edit-last-name').val();
@@ -194,6 +203,7 @@
             }
         }
 
+        // Function to update an employee
         function updateEmployee(){
             var empId = document.getElementById("emp-id").value;
             var empData = {
@@ -226,6 +236,7 @@
     </script>
 </head>
 <body>
+    <!-- Page Title -->
     <h2 id="page-title" style="text-align: center; color: #ff5245;">List of Employees</h2>
 
     <!-- Total Employee Count and Add Employee Button -->

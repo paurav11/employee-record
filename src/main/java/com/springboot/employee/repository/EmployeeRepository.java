@@ -1,5 +1,16 @@
-package com.springboot.employee;
+/**
+ @author: Paurav Shah
+ @date: 31/05/2022
 
+ @Repository annotation indicates that the class provides the mechanism for storage, retrieval, update, delete and
+ search operation on objects.
+ @Query annotation refers to the custom SQL database query for a given method.
+ ?1, ?2, ... are the parameters passed into the query from the below method.
+ */
+
+package com.springboot.employee.repository;
+
+import com.springboot.employee.entity.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

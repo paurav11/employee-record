@@ -1,11 +1,23 @@
-package com.springboot.employee;
+/**
+ @author: Paurav Shah
+ @date: 31/05/2022
+
+ @Entity annotation represents the entity class for database schema.
+ @Table annotation refers to the database table.
+ @Column annotation refers to the database table column.
+ @Id annotation refers to the primary key column of the database table.
+ @GeneratedValue(strategy=GenerationType.AUTO) annotation refers to auto-generation of employeeId.
+ This is an employee entity class with appropriate getters, setters, and constructors.
+ */
+
+package com.springboot.employee.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 
-// Employee Model for the Employee Table in the Database Schema
+// Employee Model for the employee table of the MySQL Database
 // Entity Class
 @Entity
 @Table(name = "employee")
@@ -39,15 +51,18 @@ public class Employee {
     @Column(name = "status")
     private String status;
 
+    // Default constructor
     public Employee() {
     }
 
+    // Parameterized constructor to set employee details
     public Employee(String firstName, String lastName, String email, String gender, String dob, double salary, String status) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.gender = gender;
         this.age = calculateAge(dob);
+        // Convert date format to dd-MM-yyyy
         LocalDate tempDate = LocalDate.parse(dob);
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         this.dob = dateTimeFormatter.format(tempDate);
@@ -55,13 +70,16 @@ public class Employee {
         this.status = status;
     }
 
+    // Function to calculate age based on the date of birth provided
     private int calculateAge(String dob) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate dobLocal = LocalDate.parse(dateTimeFormatter.format(LocalDate.parse(dob)));
         LocalDate currDate = LocalDate.now();
+        // Method to calculate age based on the dob and the current date
         return Period.between(dobLocal,currDate).getYears();
     }
 
+    // Getters & Setters
     public int getEmployeeId() {
         return employeeId;
     }

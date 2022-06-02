@@ -1,53 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<!-- @author: Paurav Shah -->
+	<!-- @date: 31/05/2022 -->
+	<!-- pom.xml (Project Object Model) is the most important file which contains spring-context dependencies -->
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.6.7</version>
+		<version>2.6.7</version> <!-- Spring Boot version -->
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.springboot</groupId>
-	<artifactId>employees</artifactId>
+	<groupId>com.springboot</groupId> <!-- Root package name -->
+	<artifactId>employee</artifactId> <!-- Artifact name-->
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Employee Record</name>
-	<description>Spring Boot Web App for Employee Record</description>
+	<name>Employee Record</name> <!-- Project name -->
+	<description>Spring Boot Web Application for Employee Record</description>
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>1.8</java.version> <!-- Application running Java version -->
 	</properties>
 	<dependencies>
-		<!-- Dependency for Spring Web Application -->
+		<!-- Dependency for Spring Boot Web Application -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		<!-- Dependency for the testing the Spring Boot Application -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!-- Dependencies to use Java Server Pages -->
+		<!-- Dependency for the Spring Boot Embedded Tomcat Server at the runtime -->
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>
 			<scope>default</scope>
 		</dependency>
+		<!-- Dependency for JSP tags library -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 		</dependency>
-		<!-- Dependencies to integrate MySQL Database with Spring Boot Application -->
+		<!-- Dependency for Spring Boot Data JPA which allows us to access and persist data between Java object/class
+		 and relational database -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+		<!-- Dependency for MySQL driver to integrate MySQL Database with the Spring Boot Application -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		<!-- Dependency to use Apache Commons library -->
+		<!-- Dependency for Apache Commons library -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
@@ -57,6 +64,7 @@
 
 	<build>
 		<plugins>
+			<!-- Plugin that provides Spring Boot support in Apache Maven -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
